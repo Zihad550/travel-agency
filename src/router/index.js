@@ -1,18 +1,28 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Home from "../views/Home.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: Home,
   },
   {
     path: "/destination/:name",
     name: "Destination",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Destination.vue"),
+      import(
+        /* webpackChunkName: "about" */ "../views/Destination/Destination.vue"
+      ),
     props: true,
+    children: [
+      {
+        path: ":name/:id",
+        name: "ExperienceDetails",
+        component: () => import("../views/ExperienceDetails.vue"),
+        props: (route) => ({ ...route.params, id: Number(route.params.id) }),
+      },
+    ],
   },
 ];
 
