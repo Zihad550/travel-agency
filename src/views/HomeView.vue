@@ -1,18 +1,50 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <h1>All Destinations</h1>
+    <div class="destinations">
+      <router-link
+        :to="{ name: 'Destination', params: { name: destination.name } }"
+        v-for="destination in destinations"
+        :key="destination.id"
+      >
+        <h2>{{ destination.name }}</h2>
+        <img :src="`/images/${destination.image}`" alt="" />
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import data from "../data.json";
 export default {
   name: "HomeView",
-  components: {
-    HelloWorld,
+  data() {
+    return {
+      destinations: data.destinations,
+    };
   },
 };
 </script>
+
+<style scoped>
+/* Home */
+.home {
+  /* margin: 20px; */
+  padding: 20px;
+}
+
+.home h1 {
+  text-align: center;
+  border-bottom: 2px solid black;
+  width: max-content;
+  margin: 15px auto;
+}
+.home img {
+  max-width: 230px;
+}
+.home .destinations {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+</style>
