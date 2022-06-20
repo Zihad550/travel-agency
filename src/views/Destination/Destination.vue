@@ -15,7 +15,7 @@
               :key="experience.slug"
               :to="{
                 name: 'ExperienceDetails',
-                params: { name: experience.slug, id: destination.id },
+                params: { placeName: experience.slug, id: destination.id },
               }"
             >
               <Experience :experience="experience" />

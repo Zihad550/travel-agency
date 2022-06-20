@@ -10,18 +10,17 @@ import sourceData from "../data.json";
 export default {
   props: {
     id: { type: Number, required: true },
-    name: { type: String, required: true },
+    placeName: { type: String, required: true },
   },
   computed: {
     destination() {
-      console.log(this.$props);
       return sourceData.destinations.find(
         (destination) => destination.id === this.id
       );
     },
     experience() {
       return this.destination.experiences.find(
-        (experience) => experience.slug === this.name
+        (experience) => experience.slug === this.placeName
       );
     },
   },
