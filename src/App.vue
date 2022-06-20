@@ -1,8 +1,12 @@
 <template>
-  <nav>
-    <Header />
-  </nav>
-  <router-view />
+  <Header />
+  <div class="container">
+    <router-view v-slot="{ Component }">
+      <transition name="slide" mode="out-in">
+        <component :is="Component" :key="$route.path" />
+      </transition>
+    </router-view>
+  </div>
 </template>
 
 <script>
@@ -168,5 +172,16 @@ a {
   padding: 10px;
   border-radius: 5px;
   border: none;
+}
+
+/* transition css */
+.slide-enter-active,
+.slide-leave-active {
+  transition: opacity 1s, transform1s;
+}
+.slide-enter-from,
+.slide-leave-to {
+  opacity: 0;
+  transition: translateX(-30%);
 }
 </style>

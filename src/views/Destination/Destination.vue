@@ -1,30 +1,32 @@
 <template>
-  <section class="container">
-    <div class="destination" v-if="destination">
-      <img :src="`/images/${destination.image}`" alt="" />
-      <h1>{{ destination.name }}</h1>
-      <p>
-        {{ destination.description }}
-      </p>
-      <section class="experiences">
-        <h2>Top Experiences in {{ destination.name }}</h2>
-        <div class="cards">
-          <router-link
-            v-for="experience in destination.experiences"
-            :key="experience.slug"
-            :to="{
-              name: 'ExperienceDetails',
-              params: { name: experience.slug, id: destination.id },
-            }"
-          >
-            <Experience :experience="experience" />
-          </router-link>
-        </div>
-        <router-view />
-      </section>
-    </div>
-    <div v-else>loading...</div>
-  </section>
+  <div>
+    <section class="container">
+      <div class="destination" v-if="destination">
+        <img :src="`/images/${destination.image}`" alt="" />
+        <h1>{{ destination.name }}</h1>
+        <p>
+          {{ destination.description }}
+        </p>
+        <section class="experiences">
+          <h2>Top Experiences in {{ destination.name }}</h2>
+          <div class="cards">
+            <router-link
+              v-for="experience in destination.experiences"
+              :key="experience.slug"
+              :to="{
+                name: 'ExperienceDetails',
+                params: { name: experience.slug, id: destination.id },
+              }"
+            >
+              <Experience :experience="experience" />
+            </router-link>
+          </div>
+          <router-view />
+        </section>
+      </div>
+      <div v-else>loading...</div>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -57,7 +59,7 @@ export default {
 
   created() {
     this.fetchData();
-    this.$watch(() => this.name, this.fetchData);
+    // this.$watch(() => this.name, this.fetchData);
   },
 };
 </script>
